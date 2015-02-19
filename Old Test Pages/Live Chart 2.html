@@ -1,0 +1,349 @@
+
+
+    <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+    <html>
+
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type"></meta>
+        <title>
+
+            Highcharts Example
+
+        </title>
+        <!--
+
+         1. Add these JavaScript inclusions in the head of…
+
+        -->
+        <script src="http://code.jquery.com/jquery-1.10.1.js" type="text/javascript"></script>
+        <script src="http://code.highcharts.com/highcharts.js" type="text/javascript"></script>
+        <!--
+
+         2. Add the JavaScript to initialize the chart on …
+
+        -->
+        <script>
+
+
+            		var chart; // global
+            		
+            		/**
+		 * Request data from the server, add it to the graph and set a timeout to request again
+		 */
+		function requestData() {
+			$.ajax({
+				url: 'live-server-data.php', 
+				success: function(point) {
+					var series = chart.series[0],
+						shift = series.data.length > 20; // shift if the series is longer than 20
+		
+					// add the point
+					chart.series[0].addPoint(eval(point), true, shift);
+					
+					// call it again after one second
+					setTimeout(requestData, 1000);	
+				},
+				cache: false
+			});
+		}
+			
+		$(document).ready(function() {
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'container',
+					defaultSeriesType: 'spline',
+					events: {
+						load: requestData
+					}
+				},
+				title: {
+					text: 'Live random data'
+				},
+				xAxis: {
+					type: 'datetime',
+					tickPixelInterval: 150,
+					maxZoom: 20 * 1000
+				},
+				yAxis: {
+					minPadding: 0.2,
+					maxPadding: 0.2,
+					title: {
+						text: 'Value',
+						margin: 80
+					}
+				},
+				series: [{
+					name: 'Random data',
+					data: []
+				}]
+			});		
+		});
+		</script>
+    </head>
+    <body>
+        <!--
+
+         3. Add the container 
+
+        -->
+        <div id="container" style="width: 800px; height: 400px; margin: 0 auto" data-highcharts-chart="0">
+            <div id="highcharts-0" class="highcharts-container" style="position: relative; overflow: hidden; width: 800px; height: … left; line-height: normal; z-index: 0; left: 0px; top: 0px;">
+
+    <svg version="1.1" style="font-family:"Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;font-size:12px;" xmlns="http://www.w3.org/2000/svg" width="800" height="400">
+        <desc>
+
+            Created with Highcharts 4.0.4
+
+        </desc>
+        <defs>
+            <clippath id="highcharts-1">
+                <rect x="0" y="0" width="648" height="279"></rect>
+            </clippath>
+        </defs>
+        <rect class=" highcharts-background" x="0" y="0" width="800" height="400" strokeWidth="0" fill="#FFFFFF"></rect>
+        <path fill="rgba(124,181,236,0.25)" d="M 148.35294117647058 215.56 C 161.67294117647057 215.56 161.… 235.56 135.0329411764706 215.56 148.35294117647058 215.56 Z"></path>
+        <g class="highcharts-grid" zIndex="1"></g>
+        <g class="highcharts-grid" zIndex="1">
+            <path fill="none" d="M 142 94.5 L 790 94.5" stroke="#C0C0C0" stroke-width="1" zIndex="1" opacity="1"></path>
+            <path fill="none" d="M 142 140.5 L 790 140.5" stroke="#C0C0C0" stroke-width="1" zIndex="1" opacity="1"></path>
+            <path fill="none" d="M 142 187.5 L 790 187.5" stroke="#C0C0C0" stroke-width="1" zIndex="1" opacity="1"></path>
+            <path fill="none" d="M 142 233.5 L 790 233.5" stroke="#C0C0C0" stroke-width="1" zIndex="1" opacity="1"></path>
+            <path fill="none" d="M 142 280.5 L 790 280.5" stroke="#C0C0C0" stroke-width="1" zIndex="1" opacity="1"></path>
+            <path fill="none" d="M 142 326.5 L 790 326.5" stroke="#C0C0C0" stroke-width="1" zIndex="1" opacity="1"></path>
+            <path fill="none" d="M 142 46.5 L 790 46.5" stroke="#C0C0C0" stroke-width="1" zIndex="1" opacity="1"></path>
+        </g>
+        <g class="highcharts-axis" zIndex="2">
+            <path fill="none" d="M 147.5 326 L 147.5 336" stroke="#C0D0E0" stroke-width="1" opacity="1"></path>
+            <path fill="none" d="M 250.5 326 L 250.5 336" stroke="#C0D0E0" stroke-width="1" opacity="1"></path>
+            <path fill="none" d="M 352.5 326 L 352.5 336" stroke="#C0D0E0" stroke-width="1" opacity="1"></path>
+            <path fill="none" d="M 455.5 326 L 455.5 336" stroke="#C0D0E0" stroke-width="1" opacity="1"></path>
+            <path fill="none" d="M 557.5 326 L 557.5 336" stroke="#C0D0E0" stroke-width="1" opacity="1"></path>
+            <path fill="none" d="M 660.5 326 L 660.5 336" stroke="#C0D0E0" stroke-width="1" opacity="1"></path>
+            <path fill="none" d="M 762.5 326 L 762.5 336" stroke="#C0D0E0" stroke-width="1" opacity="1"></path>
+            <path fill="none" d="M 142 326.5 L 790 326.5" stroke="#C0D0E0" stroke-width="1" zIndex="7" visibility="visible"></path>
+        </g>
+        <g class="highcharts-axis" zIndex="2">
+            <text class=" highcharts-yaxis-title" x="25.149999618530273" zIndex="7" text-anchor="middle" transform="translate(0,0) rotate(270 25.149999618530273 186.5)" style="color:#707070;fill:#707070;" visibility="visible" y="186.5">
+
+                Value
+
+            </text>
+        </g>
+        <g class="highcharts-series-group" zIndex="3">
+            <g class="highcharts-series" visibility="visible" zIndex="0.1" transform="translate(142,47) scale(1 1)" clip-path="url(#highcharts-1)">
+                <path fill="none" d="M 6.352941176470588 124.62 C 6.352941176470588 124.62 30.944…0000000007 641.6470588235294 226.92 641.6470588235294 226.92" stroke="#7cb5ec" stroke-width="2" zIndex="1" stroke-linejoin="round" stroke-linecap="round"></path>
+                <path class=" highcharts-tracker" fill="none" d="M -3.647058823529412 124.62 L 6.352941176470588 124.62 C 6.3…4 226.92 641.6470588235294 226.92 L 651.6470588235294 226.92" stroke-linejoin="round" visibility="visible" stroke="rgba(192,192,192,0.0001)" stroke-width="22" zIndex="2" style=""></path>
+
+</g>
+<g class="highcharts-markers highcharts-tracker" visibility="visible" zIndex="0.1" transform="translate(142,47) scale(1 1)" clip-path="none" style="">
+
+        <path fill="#7cb5ec" d="M 6 120.62 C 11.328 120.62 11.328 128.62 6 128.62 C 0.6719999999999999 128.62 0.6719999999999999 120.62 6 120.62 Z"></path>
+        <path fill="#7cb5ec" d="M 47 180.14 C 52.328 180.14 52.328 188.14 47 188.14 C 41.672 188.14 41.672 180.14 47 180.14 Z"></path>
+        <path fill="#7cb5ec" d="M 67 85.28 C 72.328 85.28 72.328 93.28 67 93.28 C 61.672 93.28 61.672 85.28 67 85.28 Z"></path>
+        <path fill="#7cb5ec" d="M 88 185.72 C 93.328 185.72 93.328 193.72 88 193.72 C 82.672 193.72 82.672 185.72 88 185.72 Z"></path>
+        <path fill="#7cb5ec" d="M 129 157.82 C 134.328 157.82 134.328 165.82 129 165.82 C 123.672 165.82 123.672 157.82 129 157.82 Z"></path>
+        <path fill="#7cb5ec" d="M 170 189.44 C 175.328 189.44 175.328 197.44 170 197.44 C 164.672 197.44 164.672 189.44 170 189.44 Z"></path>
+        <path fill="#7cb5ec" d="M 190 100.16 C 195.328 100.16 195.328 108.16 190 108.16 C 184.672 108.16 184.672 100.16 190 100.16 Z"></path>
+        <path fill="#7cb5ec" d="M 231 167.12 C 236.328 167.12 236.328 175.12 231 175.12 C 225.672 175.12 225.672 167.12 231 167.12 Z"></path>
+        <path fill="#7cb5ec" d="M 272 208.04 C 277.328 208.04 277.328 216.04 272 216.04 C 266.672 216.04 266.672 208.04 272 208.04 Z"></path>
+        <path fill="#7cb5ec" d="M 293 55.51999999999998 C 298.328 55.51999999999998 298.328 …9999999998 287.672 55.51999999999998 293 55.51999999999998 Z"></path>
+        <path fill="#7cb5ec" d="M 313 77.84 C 318.328 77.84 318.328 85.84 313 85.84 C 307.672 85.84 307.672 77.84 313 77.84 Z"></path>
+        <path fill="#7cb5ec" d="M 354 64.82 C 359.328 64.82 359.328 72.82 354 72.82 C 348.672 72.82 348.672 64.82 354 64.82 Z"></path>
+        <path fill="#7cb5ec" d="M 395 180.14 C 400.328 180.14 400.328 188.14 395 188.14 C 389.672 188.14 389.672 180.14 395 180.14 Z"></path>
+        <path fill="#7cb5ec" d="M 416 221.06 C 421.328 221.06 421.328 229.06 416 229.06 C 410.672 229.06 410.672 221.06 416 221.06 Z"></path>
+        <path fill="#7cb5ec" d="M 457 189.44 C 462.328 189.44 462.328 197.44 457 197.44 C 451.672 197.44 451.672 189.44 457 189.44 Z"></path>
+        <path fill="#7cb5ec" d="M 498 137.35999999999999 C 503.328 137.35999999999999 503.32…99999999 492.672 137.35999999999999 498 137.35999999999999 Z"></path>
+        <path fill="#7cb5ec" d="M 518 85.28 C 523.328 85.28 523.328 93.28 518 93.28 C 512.672 93.28 512.672 85.28 518 85.28 Z"></path>
+        <path fill="#7cb5ec" d="M 539 185.72 C 544.328 185.72 544.328 193.72 539 193.72 C 533.672 193.72 533.672 185.72 539 185.72 Z"></path>
+        <path fill="#7cb5ec" d="M 580 61.099999999999994 C 585.328 61.099999999999994 585.32…672 69.1 574.672 61.099999999999994 580 61.099999999999994 Z"></path>
+        <path fill="#7cb5ec" d="M 621 129.92 C 626.328 129.92 626.328 137.92 621 137.92 C 615.672 137.92 615.672 129.92 621 129.92 Z"></path>
+        <path fill="#7cb5ec" d="M 641 222.92 C 646.328 222.92 646.328 230.92 641 230.92 C 635.672 230.92 635.672 222.92 641 222.92 Z"></path>
+    </g>
+
+</g>
+<text class="highcharts-title" x="400" text-anchor="middle" zIndex="4" style="color:#333333;font-size:18px;fill:#333333;width:736px;" y="25">
+
+    <tspan>
+
+        Live random data
+
+    </tspan>
+
+</text>
+<g class="highcharts-legend" zIndex="7" transform="translate(344,367)">
+
+    <g zIndex="1">
+        <g>
+            <g class="highcharts-legend-item" zIndex="1" transform="translate(8,3)">
+
+                <path fill="none" d="M 0 11 L 16 11" stroke="#7cb5ec" stroke-width="2"></path>
+                <path fill="#7cb5ec" d="M 8 7 C 13.328 7 13.328 15 8 15 C 2.6719999999999997 15 2.6719999999999997 7 8 7 Z"></path>
+                <text x="21" style="color:#333333;font-size:12px;font-weight:bold;cursor:pointer;fill:#333333;" text-anchor="start" zIndex="2" y="15">
+                    <tspan>
+
+                        Random data
+
+                    </tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+
+</g>
+<g class="highcharts-axis-labels highcharts-xaxis-labels" zIndex="7">
+
+    <text x="148.35294117647058" text-anchor="middle" style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="346" opacity="1">
+
+        18:07:50
+
+    </text>
+    <text x="250.81973434535104" text-anchor="middle" style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="346" opacity="1">
+
+        18:07:55
+
+    </text>
+    <text x="353.28652751423147" text-anchor="middle" style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="346" opacity="1">
+
+        18:08:00
+
+    </text>
+    <text x="455.75332068311195" text-anchor="middle" style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="346" opacity="1">
+
+        18:08:05
+
+    </text>
+    <text x="558.2201138519924" text-anchor="middle" style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="346" opacity="1">
+
+        18:08:10
+
+    </text>
+    <text x="660.6869070208728" text-anchor="middle" style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="346" opacity="1">
+
+        18:08:15
+
+    </text>
+    <text x="763.1537001897533" text-anchor="middle" style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="346" opacity="1">
+
+        18:08:20
+
+    </text>
+
+</g>
+<g class="highcharts-axis-labels highcharts-yaxis-labels" zIndex="7">
+
+    <text x="127" text-anchor="end" style="width:244px;color:#606060;cursor:default;font-size:11px;fill:#606060;" y="98.75" opacity="1">
+
+        100
+
+    </text>
+    <text x="127" text-anchor="end" style="width:244px;color:#606060;cursor:default;font-size:11px;fill:#606060;" y="284.75" opacity="1">
+
+        0
+
+    </text>
+    <text x="127" text-anchor="end" style="width:244px;color:#606060;cursor:default;font-size:11px;fill:#606060;" y="238.25" opacity="1">
+
+        25
+
+    </text>
+    <text x="127" text-anchor="end" style="width:244px;color:#606060;cursor:default;font-size:11px;fill:#606060;" y="191.75" opacity="1">
+
+        50
+
+    </text>
+    <text x="127" text-anchor="end" style="width:244px;color:#606060;cursor:default;font-size:11px;fill:#606060;" y="145.25" opacity="1">
+
+        75
+
+    </text>
+    <text x="127" text-anchor="end" style="width:244px;color:#606060;cursor:default;font-size:11px;fill:#606060;" y="331.25" opacity="1">
+
+        -25
+
+    </text>
+    <text x="127" text-anchor="end" style="width:244px;color:#606060;cursor:default;font-size:11px;fill:#606060;" y="52.25" opacity="1">
+
+        125
+
+    </text>
+
+</g>
+<g class="highcharts-tooltip" zIndex="8" style="cursor:default;padding:0;white-space:nowrap;" transform="translate(274,-9999)" opacity="0" visibility="visible">
+
+    <path fill="none" d="M 3.5 0.5 L 150.5 0.5 C 153.5 0.5 153.5 0.5 153.5 3.5 L 153.…5 45.5 0.5 45.5 0.5 42.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5" isShadow="true" stroke="black" stroke-opacity="0.049999999999999996" stroke-width="5" transform="translate(1, 1)" width="153" height="45"></path>
+    <path fill="none" d="M 3.5 0.5 L 150.5 0.5 C 153.5 0.5 153.5 0.5 153.5 3.5 L 153.…5 45.5 0.5 45.5 0.5 42.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5" isShadow="true" stroke="black" stroke-opacity="0.09999999999999999" stroke-width="3" transform="translate(1, 1)" width="153" height="45"></path>
+    <path fill="none" d="M 3.5 0.5 L 150.5 0.5 C 153.5 0.5 153.5 0.5 153.5 3.5 L 153.…5 45.5 0.5 45.5 0.5 42.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5" isShadow="true" stroke="black" stroke-opacity="0.15" stroke-width="1" transform="translate(1, 1)" width="153" height="45"></path>
+    <path fill="rgba(249, 249, 249, .85)" d="M 3.5 0.5 L 150.5 0.5 C 153.5 0.5 153.5 0.5 153.5 3.5 L 153.…5 45.5 0.5 45.5 0.5 42.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5" stroke="#7cb5ec" stroke-width="1"></path>
+    <text x="8" zIndex="1" style="font-size:12px;color:#333333;fill:#333333;" y="21">
+        <tspan style="font-size: 10px">
+
+            Thursday, Dec 18, 18:06:40
+
+        </tspan>
+        <tspan style="fill:#7cb5ec" x="8" dy="16">
+
+            ●
+
+        </tspan>
+        <tspan dx="0">
+
+             Random data: 
+
+        </tspan>
+        <tspan style="font-weight:bold" dx="0">
+
+            45
+
+        </tspan>
+    </text>
+
+</g>
+<text x="790" text-anchor="end" zIndex="8" style="cursor:pointer;color:#909090;font-size:9px;fill:#909090;" y="395">
+
+                            Highcharts.com
+
+                        </text>
+                    </svg>
+                </div>
+            </div>
+            <div style="width: 800px; margin: 0 auto">
+                <p>
+
+                    This example shows how to run a live chart with da…
+
+                </p>
+                <p>
+
+                    This is the content of the PHP file, 
+
+                    <a href="live-server-data.php">
+
+
+                        				live-server-data.php
+
+                    </a>
+
+                    :
+
+                </p>
+                <pre>
+
+                    &lt;?php 
+					// Set the JSON header
+					header("Content-type: text/json");
+
+					// The x value is the current JavaScript time, which is the Unix time multiplied by 1000.
+					$x = time() * 1000;
+					// The y value is a random number
+					$y = rand(0, 100);
+
+					// Create a PHP array and echo it as JSON
+					$ret = array($x, $y);
+					echo json_encode($ret);
+					?&gt;
+
+                </pre>
+            </div>
+        </body>
+    </html>
+

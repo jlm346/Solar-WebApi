@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Highcharts Example</title>
+		
+		
+		<!-- 1. Add these JavaScript inclusions in the head of your page -->
+		<script type="text/javascript" src="Highcharts%20Example_files/jquery-1.js"></script>
+		<script type="text/javascript" src="Highcharts%20Example_files/highcharts.js"></script>
+		
+		
+		<!-- 2. Add the JavaScript to initialize the chart on document ready -->
+		<script>
+		var chart; // global
+		
+		/**
+		 * Request data from the server, add it to the graph and set a timeout to request again
+		 */
+		function requestData() {
+			$.ajax({
+				url: 'live-server-data.php', 
+				success: function(point) {
+					var series = chart.series[0],
+						shift = series.data.length > 20; // shift if the series is longer than 20
+		
+					// add the point
+					chart.series[0].addPoint(eval(point), true, shift);
+					
+					// call it again after one second
+					setTimeout(requestData, 1000);	
+				},
+				cache: false
+			});
+		}
+			
+		$(document).ready(function() {
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'container',
+					defaultSeriesType: 'spline',
+					events: {
+						load: requestData
+					}
+				},
+				title: {
+					text: 'Live random data'
+				},
+				xAxis: {
+					type: 'datetime',
+					tickPixelInterval: 150,
+					maxZoom: 20 * 1000
+				},
+				yAxis: {
+					minPadding: 0.2,
+					maxPadding: 0.2,
+					title: {
+						text: 'Value',
+						margin: 80
+					}
+				},
+				series: [{
+					name: 'Random data',
+					data: []
+				}]
+			});		
+		});
+		</script>
+		
+	</head>
+	<body>
+		
+		<!-- 3. Add the container -->
+		<div data-highcharts-chart="0" id="container" style="width: 800px; height: 400px; margin: 0 auto"><div style="position: relative; overflow: hidden; width: 800px; height: 400px; text-align: left; line-height: normal; z-index: 0; left: 0px; top: 0.100006px;" id="highcharts-0" class="highcharts-container"><svg height="400" width="800" xmlns="http://www.w3.org/2000/svg" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif;font-size:12px;" version="1.1"><desc>Created with Highcharts 4.0.4</desc><defs><clipPath id="highcharts-1"><rect height="279" width="648" y="0" x="0"></rect></clipPath></defs><rect class=" highcharts-background" fill="#FFFFFF" strokeWidth="0" height="400" width="800" y="0" x="0"></rect><path d="M 0 0" fill="rgba(124,181,236,0.25)"></path><g zIndex="1" class="highcharts-grid"></g><g zIndex="1" class="highcharts-grid"><path opacity="1" zIndex="1" stroke-width="1" stroke="#C0C0C0" d="M 142 94.5 L 790 94.5" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#C0C0C0" d="M 142 140.5 L 790 140.5" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#C0C0C0" d="M 142 187.5 L 790 187.5" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#C0C0C0" d="M 142 233.5 L 790 233.5" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#C0C0C0" d="M 142 280.5 L 790 280.5" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#C0C0C0" d="M 142 326.5 L 790 326.5" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#C0C0C0" d="M 142 46.5 L 790 46.5" fill="none"></path></g><g zIndex="2" class="highcharts-axis"><path opacity="1" stroke-width="1" stroke="#C0D0E0" d="M 200.5 326 L 200.5 336" fill="none"></path><path opacity="1" stroke-width="1" stroke="#C0D0E0" d="M 333.5 326 L 333.5 336" fill="none"></path><path opacity="1" stroke-width="1" stroke="#C0D0E0" d="M 465.5 326 L 465.5 336" fill="none"></path><path opacity="1" stroke-width="1" stroke="#C0D0E0" d="M 597.5 326 L 597.5 336" fill="none"></path><path opacity="1" stroke-width="1" stroke="#C0D0E0" d="M 730.5 326 L 730.5 336" fill="none"></path><path visibility="visible" zIndex="7" stroke-width="1" stroke="#C0D0E0" d="M 142 326.5 L 790 326.5" fill="none"></path></g><g zIndex="2" class="highcharts-axis"><text y="186.5" visibility="visible" style="color:#707070;fill:#707070;" class=" highcharts-yaxis-title" transform="translate(0,0) rotate(270 25.149999618530273 186.5)" text-anchor="middle" zIndex="7" x="25.149999618530273">Value</text></g><g zIndex="3" class="highcharts-series-group"><g clip-path="url(#highcharts-1)" transform="translate(142,47) scale(1 1)" zIndex="0.1" visibility="visible" class="highcharts-series"><path stroke-linecap="round" stroke-linejoin="round" zIndex="1" stroke-width="2" stroke="#7cb5ec" d="M 6.352941176470588 132.06 C 6.352941176470588 132.06 22.235294117647058 76.25999999999999 32.8235294117647 76.25999999999999 C 43.411764705882355 76.25999999999999 48.705882352941174 99.44799999999998 59.294117647058826 115.32 C 80.47058823529412 147.06399999999996 91.05882352941175 195.3 112.23529411764706 195.3 C 122.82352941176471 195.3 128.11764705882354 192.696 138.7058823529412 191.57999999999998 C 149.29411764705884 190.464 154.58823529411765 191.57999999999998 165.1764705882353 189.72 C 175.76470588235296 187.86 181.05882352941177 113.45999999999998 191.64705882352942 113.45999999999998 C 202.23529411764707 113.45999999999998 207.5294117647059 132.06 218.11764705882354 132.06 C 228.70588235294116 132.06 234 132.06 244.58823529411765 132.06 C 255.1764705882353 132.06 260.47058823529414 125.736 271.05882352941177 111.6 C 281.6470588235294 97.464 286.9411764705882 61.379999999999995 297.52941176470586 61.379999999999995 C 318.70588235294116 61.379999999999995 329.2941176470588 117.17999999999998 350.4705882352941 117.17999999999998 C 361.0588235294117 117.17999999999998 366.35294117647055 57.66 376.94117647058823 57.66 C 387.52941176470586 57.66 392.8235294117647 57.66 403.4117647058823 74.39999999999998 C 414 91.13999999999996 419.2941176470587 212.04 429.88235294117646 212.04 C 451.0588235294117 212.04 461.6470588235294 212.04 482.8235294117647 200.88 C 493.4117647058823 189.72 498.70588235294116 96.72 509.29411764705884 96.72 C 519.8823529411765 96.72 525.1764705882354 219.48 535.7647058823529 219.48 C 546.3529411764706 219.48 551.6470588235294 219.48 562.2352941176471 208.32 C 572.8235294117646 197.16 578.1176470588236 124.62 588.7058823529412 124.62 C 609.8823529411765 124.62 641.6470588235294 223.2 641.6470588235294 223.2" fill="none"></path><path style="" class=" highcharts-tracker" zIndex="2" stroke-width="22" stroke="rgba(192,192,192,0.0001)" visibility="visible" stroke-linejoin="round" d="M -3.647058823529412 132.06 L 6.352941176470588 132.06 C 6.352941176470588 132.06 22.235294117647058 76.25999999999999 32.8235294117647 76.25999999999999 C 43.411764705882355 76.25999999999999 48.705882352941174 99.44799999999998 59.294117647058826 115.32 C 80.47058823529412 147.06399999999996 91.05882352941175 195.3 112.23529411764706 195.3 C 122.82352941176471 195.3 128.11764705882354 192.696 138.7058823529412 191.57999999999998 C 149.29411764705884 190.464 154.58823529411765 191.57999999999998 165.1764705882353 189.72 C 175.76470588235296 187.86 181.05882352941177 113.45999999999998 191.64705882352942 113.45999999999998 C 202.23529411764707 113.45999999999998 207.5294117647059 132.06 218.11764705882354 132.06 C 228.70588235294116 132.06 234 132.06 244.58823529411765 132.06 C 255.1764705882353 132.06 260.47058823529414 125.736 271.05882352941177 111.6 C 281.6470588235294 97.464 286.9411764705882 61.379999999999995 297.52941176470586 61.379999999999995 C 318.70588235294116 61.379999999999995 329.2941176470588 117.17999999999998 350.4705882352941 117.17999999999998 C 361.0588235294117 117.17999999999998 366.35294117647055 57.66 376.94117647058823 57.66 C 387.52941176470586 57.66 392.8235294117647 57.66 403.4117647058823 74.39999999999998 C 414 91.13999999999996 419.2941176470587 212.04 429.88235294117646 212.04 C 451.0588235294117 212.04 461.6470588235294 212.04 482.8235294117647 200.88 C 493.4117647058823 189.72 498.70588235294116 96.72 509.29411764705884 96.72 C 519.8823529411765 96.72 525.1764705882354 219.48 535.7647058823529 219.48 C 546.3529411764706 219.48 551.6470588235294 219.48 562.2352941176471 208.32 C 572.8235294117646 197.16 578.1176470588236 124.62 588.7058823529412 124.62 C 609.8823529411765 124.62 641.6470588235294 223.2 641.6470588235294 223.2 L 651.6470588235294 223.2" fill="none"></path></g><g style="" clip-path="none" transform="translate(142,47) scale(1 1)" zIndex="0.1" visibility="visible" class="highcharts-markers highcharts-tracker"><path d="M 6 128.06 C 11.328 128.06 11.328 136.06 6 136.06 C 0.6719999999999999 136.06 0.6719999999999999 128.06 6 128.06 Z" fill="#7cb5ec"></path><path d="M 32 72.25999999999999 C 37.328 72.25999999999999 37.328 80.25999999999999 32 80.25999999999999 C 26.672 80.25999999999999 26.672 72.25999999999999 32 72.25999999999999 Z" fill="#7cb5ec"></path><path d="M 59 111.32 C 64.328 111.32 64.328 119.32 59 119.32 C 53.672 119.32 53.672 111.32 59 111.32 Z" fill="#7cb5ec"></path><path d="M 112 191.3 C 117.328 191.3 117.328 199.3 112 199.3 C 106.672 199.3 106.672 191.3 112 191.3 Z" fill="#7cb5ec"></path><path d="M 138 187.57999999999998 C 143.328 187.57999999999998 143.328 195.57999999999998 138 195.57999999999998 C 132.672 195.57999999999998 132.672 187.57999999999998 138 187.57999999999998 Z" fill="#7cb5ec"></path><path d="M 165 185.72 C 170.328 185.72 170.328 193.72 165 193.72 C 159.672 193.72 159.672 185.72 165 185.72 Z" fill="#7cb5ec"></path><path d="M 191 109.45999999999998 C 196.328 109.45999999999998 196.328 117.45999999999998 191 117.45999999999998 C 185.672 117.45999999999998 185.672 109.45999999999998 191 109.45999999999998 Z" fill="#7cb5ec"></path><path d="M 218 128.06 C 223.328 128.06 223.328 136.06 218 136.06 C 212.672 136.06 212.672 128.06 218 128.06 Z" fill="#7cb5ec"></path><path d="M 244 128.06 C 249.328 128.06 249.328 136.06 244 136.06 C 238.672 136.06 238.672 128.06 244 128.06 Z" fill="#7cb5ec"></path><path d="M 271 107.6 C 276.328 107.6 276.328 115.6 271 115.6 C 265.672 115.6 265.672 107.6 271 107.6 Z" fill="#7cb5ec"></path><path d="M 297 57.379999999999995 C 302.328 57.379999999999995 302.328 65.38 297 65.38 C 291.672 65.38 291.672 57.379999999999995 297 57.379999999999995 Z" fill="#7cb5ec"></path><path d="M 350 113.17999999999998 C 355.328 113.17999999999998 355.328 121.17999999999998 350 121.17999999999998 C 344.672 121.17999999999998 344.672 113.17999999999998 350 113.17999999999998 Z" fill="#7cb5ec"></path><path d="M 376 53.66 C 381.328 53.66 381.328 61.66 376 61.66 C 370.672 61.66 370.672 53.66 376 53.66 Z" fill="#7cb5ec"></path><path d="M 403 70.39999999999998 C 408.328 70.39999999999998 408.328 78.39999999999998 403 78.39999999999998 C 397.672 78.39999999999998 397.672 70.39999999999998 403 70.39999999999998 Z" fill="#7cb5ec"></path><path d="M 429 208.04 C 434.328 208.04 434.328 216.04 429 216.04 C 423.672 216.04 423.672 208.04 429 208.04 Z" fill="#7cb5ec"></path><path d="M 482 196.88 C 487.328 196.88 487.328 204.88 482 204.88 C 476.672 204.88 476.672 196.88 482 196.88 Z" fill="#7cb5ec"></path><path d="M 509 92.72 C 514.328 92.72 514.328 100.72 509 100.72 C 503.672 100.72 503.672 92.72 509 92.72 Z" fill="#7cb5ec"></path><path d="M 535 215.48 C 540.328 215.48 540.328 223.48 535 223.48 C 529.672 223.48 529.672 215.48 535 215.48 Z" fill="#7cb5ec"></path><path d="M 562 204.32 C 567.328 204.32 567.328 212.32 562 212.32 C 556.672 212.32 556.672 204.32 562 204.32 Z" fill="#7cb5ec"></path><path d="M 588 120.62 C 593.328 120.62 593.328 128.62 588 128.62 C 582.672 128.62 582.672 120.62 588 120.62 Z" fill="#7cb5ec"></path><path d="M 641 219.2 C 646.328 219.2 646.328 227.2 641 227.2 C 635.672 227.2 635.672 219.2 641 219.2 Z" fill="#7cb5ec"></path></g></g><text y="25" style="color:#333333;font-size:18px;fill:#333333;width:736px;" zIndex="4" class="highcharts-title" text-anchor="middle" x="400"><tspan>Live random data</tspan></text><g transform="translate(344,367)" zIndex="7" class="highcharts-legend"><g zIndex="1"><g><g transform="translate(8,3)" zIndex="1" class="highcharts-legend-item"><path stroke-width="2" stroke="#7cb5ec" d="M 0 11 L 16 11" fill="none"></path><path d="M 8 7 C 13.328 7 13.328 15 8 15 C 2.6719999999999997 15 2.6719999999999997 7 8 7 Z" fill="#7cb5ec"></path><text y="15" zIndex="2" text-anchor="start" style="color:#333333;font-size:12px;font-weight:bold;cursor:pointer;fill:#333333;" x="21"><tspan>Random data</tspan></text></g></g></g></g><g zIndex="7" class="highcharts-axis-labels highcharts-xaxis-labels"><text opacity="1" y="346" style="color:#606060;cursor:default;font-size:11px;fill:#606060;" text-anchor="middle" x="201.29411764705884">17:37:00</text><text opacity="1" y="346" style="color:#606060;cursor:default;font-size:11px;fill:#606060;" text-anchor="middle" x="333.6470588235294">17:37:05</text><text opacity="1" y="346" style="color:#606060;cursor:default;font-size:11px;fill:#606060;" text-anchor="middle" x="466">17:37:10</text><text opacity="1" y="346" style="color:#606060;cursor:default;font-size:11px;fill:#606060;" text-anchor="middle" x="598.3529411764706">17:37:15</text><text opacity="1" y="346" style="color:#606060;cursor:default;font-size:11px;fill:#606060;" text-anchor="middle" x="730.7058823529412">17:37:20</text></g><g zIndex="7" class="highcharts-axis-labels highcharts-yaxis-labels"><text opacity="1" y="98.75" style="width:244px;color:#606060;cursor:default;font-size:11px;fill:#606060;" text-anchor="end" x="127">100</text><text opacity="1" y="284.75" style="width:244px;color:#606060;cursor:default;font-size:11px;fill:#606060;" text-anchor="end" x="127">0</text><text opacity="1" y="238.25" style="width:244px;color:#606060;cursor:default;font-size:11px;fill:#606060;" text-anchor="end" x="127">25</text><text opacity="1" y="191.75" style="width:244px;color:#606060;cursor:default;font-size:11px;fill:#606060;" text-anchor="end" x="127">50</text><text opacity="1" y="145.25" style="width:244px;color:#606060;cursor:default;font-size:11px;fill:#606060;" text-anchor="end" x="127">75</text><text opacity="1" y="331.25" style="width:244px;color:#606060;cursor:default;font-size:11px;fill:#606060;" text-anchor="end" x="127">-25</text><text opacity="1" y="52.25" style="width:244px;color:#606060;cursor:default;font-size:11px;fill:#606060;" text-anchor="end" x="127">125</text></g><g visibility="visible" opacity="0" transform="translate(349,-9999)" style="cursor:default;padding:0;white-space:nowrap;" zIndex="8" class="highcharts-tooltip"><path height="45" width="153" transform="translate(1, 1)" stroke-width="5" stroke-opacity="0.049999999999999996" stroke="black" isShadow="true" d="M 3.5 0.5 L 150.5 0.5 C 153.5 0.5 153.5 0.5 153.5 3.5 L 153.5 42.5 C 153.5 45.5 153.5 45.5 150.5 45.5 L 82.5 45.5 76.5 51.5 70.5 45.5 3.5 45.5 C 0.5 45.5 0.5 45.5 0.5 42.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5" fill="none"></path><path height="45" width="153" transform="translate(1, 1)" stroke-width="3" stroke-opacity="0.09999999999999999" stroke="black" isShadow="true" d="M 3.5 0.5 L 150.5 0.5 C 153.5 0.5 153.5 0.5 153.5 3.5 L 153.5 42.5 C 153.5 45.5 153.5 45.5 150.5 45.5 L 82.5 45.5 76.5 51.5 70.5 45.5 3.5 45.5 C 0.5 45.5 0.5 45.5 0.5 42.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5" fill="none"></path><path height="45" width="153" transform="translate(1, 1)" stroke-width="1" stroke-opacity="0.15" stroke="black" isShadow="true" d="M 3.5 0.5 L 150.5 0.5 C 153.5 0.5 153.5 0.5 153.5 3.5 L 153.5 42.5 C 153.5 45.5 153.5 45.5 150.5 45.5 L 82.5 45.5 76.5 51.5 70.5 45.5 3.5 45.5 C 0.5 45.5 0.5 45.5 0.5 42.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5" fill="none"></path><path stroke-width="1" stroke="#7cb5ec" d="M 3.5 0.5 L 150.5 0.5 C 153.5 0.5 153.5 0.5 153.5 3.5 L 153.5 42.5 C 153.5 45.5 153.5 45.5 150.5 45.5 L 82.5 45.5 76.5 51.5 70.5 45.5 3.5 45.5 C 0.5 45.5 0.5 45.5 0.5 42.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5" fill="rgba(249, 249, 249, .85)"></path><text y="21" style="font-size:12px;color:#333333;fill:#333333;" zIndex="1" x="8"><tspan style="font-size: 10px">Thursday, Dec 18, 17:36:06</tspan><tspan dy="16" x="8" style="fill:#7cb5ec">●</tspan><tspan dx="0"> Random data: </tspan><tspan dx="0" style="font-weight:bold">100</tspan></text></g><text y="395" style="cursor:pointer;color:#909090;font-size:9px;fill:#909090;" zIndex="8" text-anchor="end" x="790">Highcharts.com</text></svg></div></div>
+		
+		<div style="width: 800px; margin: 0 auto">
+			<p>This example shows how to run a live chart with data retrieved from the server
+			each second. Study the source code for details.</p>
+			<p>This is the content of the PHP file, <a href="http://www.highcharts.com/studies/live-server-data.php">
+				live-server-data.php</a>:</p>
+<?php 
+// Set the JSON header
+header("Content-type: text/json");
+
+// The x value is the current JavaScript time, which is the Unix time multiplied by 1000.
+$x = time() * 1000; <!-- time() * 1000; originally -->
+// The y value is a random number
+$y = rand(0, 100);; <!-- rand(0, 100); originally -->
+
+// Create a PHP array and echo it as JSON
+$ret = array($x, $y);
+echo json_encode($ret);
+?>
+			
+		</div>
+	
+
+</body></html>
